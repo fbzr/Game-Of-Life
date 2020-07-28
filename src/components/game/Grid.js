@@ -11,6 +11,17 @@ import React, { useState, useEffect } from "react"
 // Array does offer good performance for access value in specific indexes
 // Problem: To update array in react state
 
+const neighbors = [
+  [0, 1],
+  [0, -1],
+  [1, -1],
+  [-1, 1],
+  [1, 1],
+  [-1, -1],
+  [1, 0],
+  [-1, 0],
+]
+
 const Grid = ({ columns, rows, isOn, interval = 1000 }) => {
   // create states for current grid and next grid
   const [grid, setGrid] = useState(null)
@@ -34,27 +45,28 @@ const Grid = ({ columns, rows, isOn, interval = 1000 }) => {
   useEffect(() => {
     let myInterval = null
     if (isOn) {
+      // clicked start button
       // setTimeout here
       myInterval = setInterval(updateGrid, interval)
     }
+
     return () => clearInterval(myInterval)
   }, [isOn])
 
   const updateCells = (row, col) => {
-    const neighbors = [
-      [0, 1],
-      [0, -1],
-      [1, -1],
-      [-1, 1],
-      [1, 1],
-      [-1, -1],
-      [1, 0],
-      [-1, 0],
-    ]
+    // update cells based on prev grid
+
+    neighbors.forEach(([row, col]) => {})
   }
 
   const updateGrid = () => {
     console.log("grid changed")
+    // loop through all cells and call update function to update it
+    for (let row = 0; row < grid.length; row++) {
+      for (let col = 0; col < grid[row].length; col++) {
+        updateCells(row, col)
+      }
+    }
   }
 
   // create another matrix make the changes to the next state based on the current state
