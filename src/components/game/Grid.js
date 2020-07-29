@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react"
-import { createGrid } from "./functions"
+import React from "react"
 // Questions:
 // What data structure should I use?
 // Why?
@@ -12,26 +11,6 @@ import { createGrid } from "./functions"
 // Problem: To update array in react state
 
 const Grid = ({ data, setData }) => {
-  //   const [nextGrid, setNextGrid] = useState(createGrid(columns, rows, true))
-
-  //   useEffect(() => {
-  //     if (!grid && !nextGrid) {
-  //       // create initial state
-  //       // initialize all cells with 0
-  //       // set length of array when it is created
-  //       const initialGrid = Array(rows)
-  //       for (let i = 0; i < rows; i++) {
-  //         initialGrid[i] = Array(columns).fill(0)
-  //       }
-
-  //       setGrid(initialGrid)
-  //       setNextGrid(initialGrid)
-  //     }
-  //   }, [])
-
-  // create another matrix make the changes to the next state based on the current state
-  //   const [nextGrid, setNextGrid] = useState(null)
-
   const handleClickOnCell = (row, col) => {
     // receives Row and Col indexes/position
     // chenge state of specific cell based on its current value
@@ -39,7 +18,7 @@ const Grid = ({ data, setData }) => {
     let updatedData = [...data]
 
     // update the copy with the new value of the cell clicked
-    updatedData[col][row] = data[col][row] === 0 ? 1 : 0
+    updatedData[row][col] = data[row][col] === 0 ? 1 : 0
 
     // update original grid with the updated copy
     setData(updatedData)
@@ -50,19 +29,21 @@ const Grid = ({ data, setData }) => {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: `repeat(${data.length}, 15px)`,
+        gridTemplateColumns: `repeat(${data[0].length}, 15px)`,
       }}
     >
-      {data?.map((col, colIndex) =>
-        col.map((value, rowIndex) => (
+      {data?.map((row, rowIndex) =>
+        row.map((value, colIndex) => (
           // create an element for each cell
           <div
-            key={`${colIndex}-${rowIndex}`}
+            key={`${rowIndex}-${colIndex}`}
             style={{
               width: 15,
               height: 15,
               backgroundColor: value ? "white" : "#333333",
               border: "solid 1px black",
+              marginLeft: "-1px",
+              marginBottom: "-1px",
             }}
             onClick={() => handleClickOnCell(rowIndex, colIndex)}
           />
