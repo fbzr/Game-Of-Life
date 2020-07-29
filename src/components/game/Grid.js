@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-
+import React, { useState, useEffect, useCallback } from "react"
+import { createGrid } from "./functions"
 // Questions:
 // What data structure should I use?
 // Why?
@@ -11,63 +11,23 @@ import React, { useState, useEffect } from "react"
 // Array does offer good performance for access value in specific indexes
 // Problem: To update array in react state
 
-const neighbors = [
-  [0, 1],
-  [0, -1],
-  [1, -1],
-  [-1, 1],
-  [1, 1],
-  [-1, -1],
-  [1, 0],
-  [-1, 0],
-]
+const Grid = ({ data, setData }) => {
+  //   const [nextGrid, setNextGrid] = useState(createGrid(columns, rows, true))
 
-const Grid = ({ columns, rows, isOn, interval = 1000 }) => {
-  // create states for current grid and next grid
-  const [grid, setGrid] = useState(null)
-  const [nextGrid, setNextGrid] = useState(null)
+  //   useEffect(() => {
+  //     if (!grid && !nextGrid) {
+  //       // create initial state
+  //       // initialize all cells with 0
+  //       // set length of array when it is created
+  //       const initialGrid = Array(rows)
+  //       for (let i = 0; i < rows; i++) {
+  //         initialGrid[i] = Array(columns).fill(0)
+  //       }
 
-  useEffect(() => {
-    if (!grid && !nextGrid) {
-      // create initial state
-      // initialize all cells with 0
-      // set length of array when it is created
-      const initialGrid = Array(rows)
-      for (let i = 0; i < rows; i++) {
-        initialGrid[i] = Array(columns).fill(0)
-      }
-
-      setGrid(initialGrid)
-      setNextGrid(initialGrid)
-    }
-  }, [])
-
-  useEffect(() => {
-    let myInterval = null
-    if (isOn) {
-      // clicked start button
-      // setTimeout here
-      myInterval = setInterval(updateGrid, interval)
-    }
-
-    return () => clearInterval(myInterval)
-  }, [isOn])
-
-  const updateCells = (row, col) => {
-    // update cells based on prev grid
-
-    neighbors.forEach(([row, col]) => {})
-  }
-
-  const updateGrid = () => {
-    console.log("grid changed")
-    // loop through all cells and call update function to update it
-    for (let row = 0; row < grid.length; row++) {
-      for (let col = 0; col < grid[row].length; col++) {
-        updateCells(row, col)
-      }
-    }
-  }
+  //       setGrid(initialGrid)
+  //       setNextGrid(initialGrid)
+  //     }
+  //   }, [])
 
   // create another matrix make the changes to the next state based on the current state
   //   const [nextGrid, setNextGrid] = useState(null)
@@ -76,13 +36,13 @@ const Grid = ({ columns, rows, isOn, interval = 1000 }) => {
     // receives Row and Col indexes/position
     // chenge state of specific cell based on its current value
     // create a copy of grid
-    let updatedGrid = [...grid]
+    let updatedData = [...data]
 
     // update the copy with the new value of the cell clicked
-    updatedGrid[row][col] = grid[row][col] === 0 ? 1 : 0
+    updatedData[col][row] = data[col][row] === 0 ? 1 : 0
 
     // update original grid with the updated copy
-    setGrid(updatedGrid)
+    setData(updatedData)
   }
 
   return (
@@ -90,18 +50,18 @@ const Grid = ({ columns, rows, isOn, interval = 1000 }) => {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: `repeat(${columns}, 15px)`,
+        gridTemplateColumns: `repeat(${data.length}, 15px)`,
       }}
     >
-      {grid?.map((row, rowIndex) =>
-        row.map((col, colIndex) => (
+      {data?.map((col, colIndex) =>
+        col.map((value, rowIndex) => (
           // create an element for each cell
           <div
-            key={`${rowIndex}${colIndex}`}
+            key={`${colIndex}-${rowIndex}`}
             style={{
               width: 15,
               height: 15,
-              backgroundColor: grid[rowIndex][colIndex] ? "white" : "darkgrey",
+              backgroundColor: value ? "white" : "#333333",
               border: "solid 1px black",
             }}
             onClick={() => handleClickOnCell(rowIndex, colIndex)}
