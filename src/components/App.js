@@ -21,7 +21,7 @@ const App = () => {
         clearInterval(interval)
       }
     }
-  }, [isOn])
+  }, [isOn, speed])
 
   useEffect(() => {
     resetGrid()
