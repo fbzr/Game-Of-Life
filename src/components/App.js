@@ -51,6 +51,12 @@ const App = () => {
     setSpeed(e.target.value * -1)
   }
 
+  const handleGridSizeChange = e => {
+    const values = e.target.value.split("x")
+    setRows(parseInt(values[0]))
+    setCols(parseInt(values[1]))
+  }
+
   return (
     <div className="main-container">
       <div>
@@ -76,6 +82,19 @@ const App = () => {
             className="slider"
             id="speedSlider"
           ></input>
+          <label for="grid-sizes">Grid size (rows X cols): </label>
+          <select
+            onChange={handleGridSizeChange}
+            name="grid-sizes"
+            id="grid-sizes"
+          >
+            <option value="25x25">25x25</option>
+            <option selected value="25x40">
+              25x40
+            </option>
+            <option value="40x25">40x25</option>
+            <option value="40x40">40x40</option>
+          </select>
         </div>
         <Rules />
       </div>
