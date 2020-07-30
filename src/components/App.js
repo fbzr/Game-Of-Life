@@ -10,7 +10,7 @@ const App = () => {
   const [generationCount, setGenerationCount] = useState(0)
   const [cols, setCols] = useState(40)
   const [rows, setRows] = useState(25)
-  const [speed, setSpeed] = useState(500)
+  const [speed, setSpeed] = useState(252)
 
   useEffect(() => {
     if (isOn) {
@@ -64,8 +64,8 @@ const App = () => {
             disabled={isOn}
             onChange={handleChangeSpeed}
             type="range"
-            min="-1500"
-            max="-10"
+            min="-500"
+            max="-5"
             value={speed * -1}
             className="slider"
             id="speedSlider"

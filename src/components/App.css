@@ -27,6 +27,7 @@ button:hover {
 
 /* The slider itself */
 .slider {
+  margin: 5px 0 -1px -1px;
   -webkit-appearance: none; /* Override default CSS styles */
   appearance: none;
   width: 100%; /* Full-width */
