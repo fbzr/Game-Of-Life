@@ -21,7 +21,7 @@ const App = () => {
         clearInterval(interval)
       }
     }
-  }, [isOn])
+  }, [isOn, speed])
 
   useEffect(() => {
     resetGrid()
@@ -68,7 +68,6 @@ const App = () => {
             data={grid}
           />
           <input
-            disabled={isOn}
             onChange={handleChangeSpeed}
             type="range"
             min="-500"
