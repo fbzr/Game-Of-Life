@@ -15,13 +15,14 @@ const Grid = ({ data, setData, resetGenerationCount }) => {
     // receives Row and Col indexes/position
     // chenge state of specific cell based on its current value
     // create a copy of grid
-    let updatedData = [...data]
-
     // update the copy with the new value of the cell clicked
-    updatedData[row][col] = data[row][col] === 0 ? 1 : 0
-
-    // update original grid with the updated copy
-    setData(updatedData)
+    // set original grid data with the updated copy
+    setData(prev => {
+      let updated = [...prev]
+      updated[row][col] = prev[row][col] === 0 ? 1 : 0
+      return updated
+    })
+    resetGenerationCount()
   }
 
   return (

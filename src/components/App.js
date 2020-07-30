@@ -53,6 +53,13 @@ const App = () => {
 
   return (
     <div className="main-container">
+      <div>
+        <p>
+          Game of Life is a cellular automaton invented by mathematician John
+          Horton Conway in 1970. The evolution of the game is determined by its
+          initial state, requiring no further input.
+        </p>
+      </div>
       <div className="top-container">
         <div>
           <Grid
