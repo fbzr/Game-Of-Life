@@ -10,12 +10,13 @@ const App = () => {
   const [generationCount, setGenerationCount] = useState(0)
   const [cols, setCols] = useState(40)
   const [rows, setRows] = useState(25)
+  const [speed, setSpeed] = useState(500)
 
   useEffect(() => {
     if (isOn) {
       const interval = setInterval(() => {
         updateGrid()
-      }, 10)
+      }, speed)
       return () => {
         clearInterval(interval)
       }
@@ -38,11 +39,16 @@ const App = () => {
 
   const resetGrid = () => {
     setGrid(createGrid(rows, cols))
+    setIsOn(false)
     setGenerationCount(0)
   }
 
   const handleStartStop = () => {
     setIsOn(prev => !prev)
+  }
+
+  const handleChangeSpeed = e => {
+    setSpeed(e.target.value * -1)
   }
 
   return (
@@ -54,6 +60,16 @@ const App = () => {
             resetGenerationCount={() => setGenerationCount(0)}
             data={grid}
           />
+          <input
+            disabled={isOn}
+            onChange={handleChangeSpeed}
+            type="range"
+            min="-1500"
+            max="-10"
+            value={speed * -1}
+            className="slider"
+            id="speedSlider"
+          ></input>
         </div>
         <Rules />
       </div>
