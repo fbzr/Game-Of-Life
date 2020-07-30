@@ -68,7 +68,6 @@ const App = () => {
             data={grid}
           />
           <input
-            disabled={isOn}
             onChange={handleChangeSpeed}
             type="range"
             min="-500"
