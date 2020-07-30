@@ -10,7 +10,7 @@ import React from "react"
 // Array does offer good performance for access value in specific indexes
 // Problem: To update array in react state
 
-const Grid = ({ data, setData }) => {
+const Grid = ({ data, setData, resetGenerationCount }) => {
   const handleClickOnCell = (row, col) => {
     // receives Row and Col indexes/position
     // chenge state of specific cell based on its current value
@@ -40,7 +40,7 @@ const Grid = ({ data, setData }) => {
             style={{
               width: 15,
               height: 15,
-              backgroundColor: value ? "white" : "#333333",
+              backgroundColor: value ? "#eeeeee" : "#333333",
               border: "solid 1px black",
               marginLeft: "-1px",
               marginBottom: "-1px",
